@@ -6,23 +6,16 @@ int main() {
 
     scanf("%lu", &cpf);
 
-    a = cpf / 10000000000;
-    b = (cpf / 1000000000) % 10;
-    c = (cpf / 100000000) % 10;
-    d = (cpf / 10000000) % 10;
-    e = (cpf / 1000000) % 10;
-    f = (cpf / 100000) % 10;
-    g = (cpf / 10000) % 10;
-    h = (cpf / 1000) % 10;
-    i = (cpf / 100) % 10;
-    j = (cpf / 10) % 10;
-    k = cpf % 10;
+    a = (cpf / 100000000) % 10;
+    b = (cpf / 10000000) % 10;
+    c = (cpf / 1000000) % 10;
+    d = (cpf / 100000) % 10;
+    e = (cpf / 10000) % 10;
+    f = (cpf / 1000) % 10;
+    g = (cpf / 100) % 10;
+    h = (cpf / 10) % 10;
+    i = cpf % 10;
 
-    // verificar iguais
-    /*if (a==b && a==c && a==d && a==e && a==f && a==g && a==h && a==i && a==j && a==k) {
-        printf("invalido\n");
-        return 0;
-    }*/
 
     S = a*10 + b*9 + c*8 + d*7 + e*6 + f*5 + g*4 + h*3 + i*2;
     R = S % 11;
@@ -36,10 +29,6 @@ int main() {
     if (R < 2) n2 = 0;
     else n2 = 11 - R;
 
-    if (n1 == j && n2 == k)
-        printf("valido\n");
-    else
-        printf("invalido\n");
-
+    printf("%d%d",n1,n2);
     return 0;
 }

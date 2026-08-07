@@ -27,7 +27,7 @@ int main() {
         } else {
             escuro[i] = false;
         }
-    }
+}
     if (total_escuros == N) {
         cout << N << "\n";
         return 0;

@@ -10,3 +10,4 @@ int main(){
     printf("%d",soma);
     return 0;
 }
+fgets
