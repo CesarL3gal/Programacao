@@ -1,0 +1,43 @@
+
+int main() {
+    // Quantidade de bandas para os testes
+    int n = 3;
+
+    // Inicialização direta do vetor de bandas com dados de teste
+    struct tipoBanda bandas[50] = {
+        {
+            "Iron Maiden",
+            2,
+            {
+                {"Run to the Hills", 1982},
+                {"Aces High", 1984}
+            }
+        },
+        {
+            "Metallica",
+            2,
+            {
+                {"Enter Sandman", 1991},
+                {"One", 1988}
+            }
+        },
+        {
+            "Cover Band",
+            1,
+            {
+                {"Run to the Hills", 2005} // Música com mesmo nome em outra banda
+            }
+        }
+    };
+
+    printf("--- Teste 1: Música existente em uma banda ---\n");
+    pesquisarNomeMusica("Enter Sandman", bandas, n);
+
+    printf("\n--- Teste 2: Música existente em mais de uma banda ---\n");
+    pesquisarNomeMusica("Run to the Hills", bandas, n);
+
+    printf("\n--- Teste 3: Música inexistente ---\n");
+    pesquisarNomeMusica("Fear of the Dark", bandas, n);
+
+    return 0;
+}

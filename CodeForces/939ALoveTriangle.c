@@ -10,8 +10,13 @@ int main(){
     bool achou=false;
     for(int i=0;i<n;i++){
         int a = g[i]-1;
+<<<<<<< HEAD
         int b=g[a]-1;
         int c=g[b]-1;
+=======
+        int b = g[a]-1;
+        int c = g[b]-1;
+>>>>>>> 773db32 (mais questoes)
         if(c==i){
             achou=true;
             break;
