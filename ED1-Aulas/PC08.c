@@ -13,13 +13,27 @@ void imprimir(const No *inicio)
 {
     (void)inicio;
     /* TODO: percorra a lista e mostre os valores. */
+    No *atual = inicio;
+    while(atual!=NULL){
+        printf("%d",atual->valor);
+        atual = atual->prox;
+    }
+    printf("\n");
 }
 
 No *buscar(No *inicio, int valor)
 {
     (void)valor;
     /* TODO: devolva o primeiro no com esse valor ou NULL. */
-    return inicio;
+    No *atual = inicio;
+    while(atual!=NULL){
+        if(atual->valor==valor){
+            return atual;
+        }
+        atual = atual->prox;
+    }
+
+    return NULL;
 }
 
 No *inserirFim(No *inicio, int valor)

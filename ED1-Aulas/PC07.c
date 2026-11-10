@@ -15,6 +15,19 @@ void selectionSort(int v[], int n, int *comparacoes, int *movimentacoes)
 void bubbleSort(int v[], int n, int *comparacoes, int *movimentacoes)
 {
     /* TODO: comparar vizinhos, usar a flag e contar as escritas em v. */
+
+    for(int i=n-1;i>=0;i--){ //do fim ao começo, já que ao organizar o ultimo sempre fica organizado
+
+        for(int j=0;j<i;j++){ //vai de 0 até o i
+            comparacoes++;
+            if(v[i]>v[i+1]){
+                int temp=v[i];
+                v[i]=v[i+1];
+                v[i+1]=temp;
+                movimentacoes++;
+            }
+        }
+    }
     (void)v; (void)n;
     *comparacoes = 0; *movimentacoes = 0;
 }
