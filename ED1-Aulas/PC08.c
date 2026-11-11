@@ -1,57 +1,107 @@
-/* EDA1 Aula 21 - PC8: listas encadeadas II
- * Complete as quatro operacoes indicadas. Compilacao: cc -std=c90 -Wall -Wextra -pedantic
- */
+ /* EDA1 Aula 21 - PC8: listas encadeadas II
+    Complete as quatro operacoes indicadas. Compilacao: cc -std=c90 -Wall -Wextra -pedantic */
+
 #include <stdio.h>
 #include <stdlib.h>
+
 
 typedef struct No {
     int valor;
     struct No *prox;
 } No;
 
-void imprimir(const No *inicio)
-{
-    (void)inicio;
-    /* TODO: percorra a lista e mostre os valores. */
+
+void imprimir(const No *inicio){
+(void)inicio;
+/* TODO: percorra a lista e mostre os valores. */
+    
     No *atual = inicio;
+
+    if(atual==NULL){
+        printf("NULL\n");
+        return;
+    }
+
     while(atual!=NULL){
-        printf("%d",atual->valor);
+        printf("%d ->",atual->valor);
         atual = atual->prox;
     }
-    printf("\n");
+    printf("NULL\n");
 }
 
-No *buscar(No *inicio, int valor)
-{
+No *buscar(No *inicio, int valor){
     (void)valor;
     /* TODO: devolva o primeiro no com esse valor ou NULL. */
     No *atual = inicio;
+
     while(atual!=NULL){
-        if(atual->valor==valor){
+        if(atual->valor == valor){
             return atual;
         }
         atual = atual->prox;
     }
-
     return NULL;
 }
 
-No *inserirFim(No *inicio, int valor)
-{
+No *inserirFim(No *inicio, int valor){
     (void)valor;
-    /* TODO: aloque e ligue um no no fim; trate lista vazia e falha de malloc. */
+/* TODO: aloque e ligue um no no fim; trate lista vazia e falha de malloc. */
+    No *proximo = (No *)malloc(sizeof(No));
+    No *atual;
+    
+    if( proximo == NULL ){
+        return inicio;
+    }
+
+    proximo->valor=valor;
+    proximo->prox=NULL;
+
+    if(inicio==NULL){
+        return proximo;
+    }
+
+    atual=inicio;
+    while(atual->prox!=NULL){
+        atual=atual->prox;
+    }
+    atual->prox=proximo;
     return inicio;
 }
 
-No *removerPrimeiro(No *inicio, int valor)
-{
+No *removerPrimeiro(No *inicio, int valor){
+
     (void)valor;
     /* TODO: remova e libere a primeira ocorrencia; trate cabeca e ausencia. */
+    No *atual;
+    if(inicio == NULL){
+        return NULL;
+    }
+    
+    //se for o cabeca
+    if(inicio->valor==valor){
+        atual = inicio->prox;
+        free(inicio);
+        return atual;
+    }
+   
+    No *anterior=inicio;
+    atual = inicio->prox;
+
+    while(atual != NULL){
+        if(atual->valor == valor){
+            anterior->prox = atual->prox;
+            free(atual);
+            return inicio;
+        }
+        anterior = atual;
+        atual = atual->prox;
+    }
     return inicio;
 }
 
-void liberarLista(No *inicio)
-{
+
+void liberarLista(No *inicio){
+
     No *proximo;
     while (inicio != NULL) {
         proximo = inicio->prox;
@@ -60,19 +110,26 @@ void liberarLista(No *inicio)
     }
 }
 
-int main(void)
-{
+
+int main(void){
+
     No *inicio;
     No *resultado;
+
     inicio = NULL;
     inicio = inserirFim(inicio, 12);
     inicio = inserirFim(inicio, 7);
     inicio = inserirFim(inicio, 19);
     imprimir(inicio);
+
     resultado = buscar(inicio, 7);
     if (resultado != NULL) printf("Encontrado: %d\n", resultado->valor);
+
     inicio = removerPrimeiro(inicio, 12);
     imprimir(inicio);
+    
     liberarLista(inicio);
     return 0;
+
 }
+

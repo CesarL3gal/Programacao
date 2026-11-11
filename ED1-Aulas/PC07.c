@@ -7,36 +7,69 @@
 
 void selectionSort(int v[], int n, int *comparacoes, int *movimentacoes)
 {
-    /* TODO: selecionar os minimos e contar comparacoes e escritas em v. */
-    (void)v; (void)n;
     *comparacoes = 0; *movimentacoes = 0;
+    /* TODO: selecionar os minimos e contar comparacoes e escritas em v. */
+    for(int i=0; i<n-1 ;i++){
+        int min_idx = i;
+        for(int j=i+1;j<n;j++){
+            (*comparacoes)++;
+            if(v[j]<v[min_idx]){//pegar o menor de todo o vetor
+                min_idx=j;
+            }
+        }
+        if(min_idx!=i){
+            int temp = v[i];
+            v[i]=v[min_idx];
+            v[min_idx] = temp;
+            *movimentacoes +=2;
+        }
+    }
 }
 
 void bubbleSort(int v[], int n, int *comparacoes, int *movimentacoes)
 {
+    *comparacoes = 0; *movimentacoes = 0;
     /* TODO: comparar vizinhos, usar a flag e contar as escritas em v. */
-
-    for(int i=n-1;i>=0;i--){ //do fim ao começo, já que ao organizar o ultimo sempre fica organizado
-
-        for(int j=0;j<i;j++){ //vai de 0 até o i
-            comparacoes++;
-            if(v[i]>v[i+1]){
-                int temp=v[i];
-                v[i]=v[i+1];
-                v[i+1]=temp;
-                movimentacoes++;
+    for(int i=0;i<n-1;i++){ //do fim ao começo, já que ao organizar o ultimo sempre fica organizado
+        int trocou=0;
+        for(int j=0;j<n-1-i;j++){ //vai de 0 até o i
+            (*comparacoes)++;
+            if(v[j] > v[j+1]){
+                int temp = v[j];
+                v[j] = v[j+1];
+                v[j+1] = temp;
+                *movimentacoes += 2;
+                trocou = 1;
             }
         }
+        if(!trocou){
+            break;
+        }
     }
-    (void)v; (void)n;
-    *comparacoes = 0; *movimentacoes = 0;
 }
 
 void insertionSort(int v[], int n, int *comparacoes, int *movimentacoes)
 {
-    /* TODO: inserir cada chave no prefixo ordenado e instrumentar. */
-    (void)v; (void)n;
     *comparacoes = 0; *movimentacoes = 0;
+    /* TODO: inserir cada chave no prefixo ordenado e instrumentar. */
+    int chave;
+    for(int i=1;i<n;i++){
+        chave = v[i];
+        int j=i-1;
+        while(j>=0){
+            (*comparacoes)++;
+            if(v[j]>chave){
+                v[j+1] = v[j];
+                (*movimentacoes)++;
+                j--;
+            }
+            else{
+                break;
+            }
+        }
+        v[j+1] = chave;
+        (*movimentacoes)++;
+    }
 }
 
 typedef void (*SortFunction)(int [], int, int *, int *);

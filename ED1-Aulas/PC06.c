@@ -6,33 +6,35 @@
 #include <stddef.h>
 /* Os retornos provisórios compilam, mas NAO resolvem a PC6. */
 int buscaLinear(int v[], int n, int x, int *consultas){
+    *consultas = 0;
     int i=0;
     while(i<n){
-        consultas++;
+        (*consultas)++;
         if(v[i]==x){
             return i;
         }
         i++;
     }
-    (void)v; (void)n; (void)x;
-    *consultas = 0;
     return -1;
 }
 int buscaBinaria(int v[], int n, int x, int *consultas){
     /* TODO: usar intervalo inclusivo e retornar ao encontrar o meio. */
+    *consultas = 0;
     int ini=0,fim=n-1;
     while(ini<=fim){
-        consultas++;
+        (*consultas)++;
         int meio = ini+(fim-ini)/2;
-        if(meio>x){
-            ini = meio+1;
+        if(v[meio]==x){
+            return meio;
+        }
+        else if(v[meio]>x){
+            fim = meio-1;
         }
         else{
-            fim = meio-1;
+            ini = meio+1;
         }
     }
     (void)v; (void)n; (void)x;
-    *consultas = 0;
     return -1;
 }
 
